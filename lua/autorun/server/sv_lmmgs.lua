@@ -92,6 +92,10 @@ function LMMGSUpdatePlayersStatus(ply)
 			ply.LMMGSGangID = false
 			ply.LMMGSGangColor = false
 			ply.LMMGSFFSetting = false
+			ply.LMMGSIsTheLeader = false
+			ply.LMMGSIsTheLeaderID = false
+			ply.LMMGSGangColor = false
+			ply.LMMGSFFSetting = false
 		end
 	end)
 end
@@ -102,6 +106,9 @@ function LMMGSDeleteGang(ply)
 		LMMGSdb:Query("DELETE FROM gangs WHERE id = "..id, function(result)
 			if result[1].affected > 0 then
 				LMMGSNotify(ply, "You have deleted the gang! This may take up to 10 seconds to change!")
+				LMMGSdb:Query("DELETE FROM players WHERE playerid = "..ply:SteamID64(), function(result)
+
+				end)
 			end
 		end)
 	end
@@ -127,7 +134,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player2 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player2 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player2 = '2', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -137,7 +144,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player3 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player3 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player3 = '3', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -147,7 +154,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player4 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player4 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player4 = '4', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -157,7 +164,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player5 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player5 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player5 = '5', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -167,7 +174,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player6 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player6 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player6 = '6', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -177,7 +184,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player7 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player7 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player7 = '7', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -187,7 +194,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player8 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player8 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player8 = '8', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -197,7 +204,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player9 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player9 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player9 = '9', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -207,7 +214,7 @@ function LMMGSLeaveGang(ply)
 							end)
 						elseif result[1].data[1].player10 == result2[1].data[1].playername then
 							LMMGSNotify(ply, "You have left the gang! This may take up to 10 seconds to change!")
-							LMMGSdb:Query("UPDATE gangs SET player10 = '1', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
+							LMMGSdb:Query("UPDATE gangs SET player10 = '10', players = "..tonumber(result[1].data[1].players) - 1 .." WHERE id = "..id, function(resultR)
 								if resultR[1].affected < 0 then
 
 								end
@@ -276,6 +283,7 @@ local function LMMGSGetPlayerBySteamID64E(string)
 			return v
 		end
 	end
+	PrintTable(tbl)
 	return "offline("..tbl[2]..")"
 end
 
@@ -360,27 +368,6 @@ end)
 
 hook.Add("PlayerInitialSpawn", "LMMGSGetPlayerInfo", function(ply)
 	LMMGSUpdatePlayersStatus(ply)
-	timer.Create("LMMGSUpdatePlayersThing_"..ply:SteamID64(), 1, 0, function()
-		for k, v in pairs(player.GetAll()) do
-			if v:IsBot() then
-			else
-				vid = LMMGSGetGangID(v)
-			end
-			if LMMGSIsInGang(ply) then
-				if LMMGSGetGangID(ply) == vid then
-					net.Start("LMMGSDrawColorForGang")
-						net.WriteTable(LMMGSGetGangColor(ply))
-						net.WriteEntity(v)
-					net.Send(ply)
-				end
-			else
-				net.Start("LMMGSDrawColorForGang")
-					net.WriteTable(Color(255,255,255,0))
-					net.WriteEntity(ply)
-				net.Send(ply)
-			end
-		end
-	end)
 end)
 --[[Hooks]]--
 
@@ -440,7 +427,7 @@ net.Receive("LMMGSAcceptedIntoGang", function(len, ply)
 	local newbie = net.ReadEntity()
 	if !LMMGSIsInGang(newbie) then
 --		if LMMGSIsInGang(ply) then
-			LMMGSdb:Query("SELECT * FROM gangs WHERE gangname = '".."Gang Name".."' AND leaderid = "..ply:SteamID64(), function(result)
+			LMMGSdb:Query("SELECT * FROM gangs WHERE leaderid = "..ply:SteamID64(), function(result)
 				PrintTable(result)
 				if result[1].affected > 0 then
 					LMMGSJoinGang(newbie, LMMGSGetEscapedString(tostring(result[1].data[1].id)))

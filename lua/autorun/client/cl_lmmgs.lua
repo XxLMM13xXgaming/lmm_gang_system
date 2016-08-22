@@ -418,7 +418,7 @@ end
 net.Receive("LMMGSCreateJoinGang", function()
 
 	notification.Kill("LMMGSLoading_"..LocalPlayer():SteamID64())
-	
+
 	local thegangtable = net.ReadTable()
 
 	local DFrame = vgui.Create( "DFrame" )
@@ -1629,23 +1629,18 @@ net.Receive("LMMGSOpenGangManager", function()
 		net.SendToServer()
 		self:SetText("Enter chat message...")
 	end
+
+	local panel4 = vgui.Create( "DPanel", sheet )
+	panel4:Dock( FILL )
+	panel4.Paint = function()
+		draw.RoundedBox(2, 0, 0, panel4:GetWide(), panel4:GetTall(), Color(35, 35, 35, 250))
+	end
+	sheet:AddSheet( "Gang Bank", panel4 )
+
+	-- ToDo
 end)
 
 net.Receive("LMMGSNotifyN", function()
 	local message = net.ReadString()
 	chat.AddText(Color(0,0,0), "[Gang System]", Color(255,255,255), ": "..message)
-end)
-
-net.Receive("LMMGSDrawColorForGang",function()
-	local color = net.ReadTable()
-	local v = net.ReadEntity()
-	local mat = Material("pp/morph/brush_outline")
-	hook.Add("PostDrawTranslucentRenderables", "Party Player Mark", function()
-				cam.Start3D2D( v:GetPos() + Vector(0,0,0),Angle(0,0,0), 0.25 )
-					local Size = 100
-					surface.SetMaterial(mat)
-					surface.SetDrawColor(color)
-					surface.DrawTexturedRect( -Size,-Size,Size*2, Size*2 )
-				cam.End3D2D()
-	end)
 end)
